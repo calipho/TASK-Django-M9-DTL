@@ -1,3 +1,14 @@
 from django.shortcuts import render
 
-# Create your views here.
+from shops.models import IceCream
+
+
+def get_ice_cream(request, ice_cream_id):
+    ice_cream = IceCream.objects.get(id=ice_cream_id)
+    context = {"ice_cream": {
+        'name': ice_cream.name,
+        'shop': ice_cream.shop,
+        'stock': ice_cream.stock
+    }
+    }
+    return render(request, 'ice_cream_detail.html', context)
